@@ -1,4 +1,5 @@
-﻿using SystemBase.Core;
+﻿using System;
+using SystemBase.Core;
 using UniRx;
 using UnityEngine;
 
@@ -36,28 +37,31 @@ namespace Systems.Plant
             if (IsLit(plant))
             {
                 plant.currentLightValue += LightIncrease * Time.deltaTime;
+                
+                if (plant.currentLightValue > plant.maxLightValue)
+                {
+                    plant.burnPoints += BurnPointsIncrease * Time.deltaTime;
+                    
+                    if (plant.burnPoints > plant.maxBurnPoints)
+                    {
+                        lifeComponent.lifePoints -= 10 * Time.deltaTime;
+                    }
+                }
+            }
+            else
+            {
+                plant.currentLightValue -= LightDecrease * Time.deltaTime;
+                
+                if (plant.currentLightValue < plant.neededLightValue)
+                {
+                    lifeComponent.lifePoints -= 1 * Time.deltaTime;
+                }
             }
 
-            plant.currentLightValue -= plant.currentLightValue <= 0 
-                ? 0 
-                : LightDecrease * Time.deltaTime;
-
-            if (plant.currentLightValue < plant.neededLightValue)
-            {
-                plant.GetComponent<PlantLifeComponent>().lifePoints -= 1 * Time.deltaTime;
-            }
-            else if (plant.currentLightValue > plant.maxLightValue)
-            {
-                plant.burnPoints += BurnPointsIncrease * Time.deltaTime;
-            }
-
-            if (plant.burnPoints > plant.maxBurnPoints)
-            {
-                plant.GetComponent<PlantLifeComponent>().lifePoints -= 10 * Time.deltaTime;
-            }
+            plant.currentLightValue = Mathf.Min(0, Mathf.Max(plant.maxLightValue, plant.currentLightValue));
         }
 
-        private bool IsLit(NeedsLightComponent plant)
+        private static bool IsLit(NeedsLightComponent plant)
         {
             var rayDirection = -plant.sun.transform.forward;
             return !Physics.Raycast(plant.transform.position, rayDirection, 40f);
