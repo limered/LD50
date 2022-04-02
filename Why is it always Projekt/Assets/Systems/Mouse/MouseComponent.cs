@@ -7,6 +7,6 @@ namespace Systems.Mouse
     public class MouseComponent : GameComponent
     {
         public GameObject dragPlane;
-        public DraggablePlantComponent draggedPlant;
+        public PotComponent draggedPlant;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Systems.Mouse
 {
-    [GameSystem(typeof(DragPlantSystem))]
+    [GameSystem(typeof(PotSystem))]
     public class MouseSystem : GameSystem<MouseComponent>
     {
         public override void Register(MouseComponent component)
@@ -40,7 +40,7 @@ namespace Systems.Mouse
 
         private static void SwitchDrag(MouseComponent mouse, RaycastHit hit)
         {
-            var plant = hit.transform.gameObject.GetComponent<DraggablePlantComponent>();
+            var plant = hit.transform.gameObject.GetComponent<PotComponent>();
             if (!plant || plant.isAnimating) return;
 
             if (plant.isDragged)

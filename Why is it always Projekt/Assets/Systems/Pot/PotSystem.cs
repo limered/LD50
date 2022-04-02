@@ -6,12 +6,12 @@ using UnityEngine;
 namespace Systems.DragPlant
 {
     [GameSystem]
-    public class DragPlantSystem : GameSystem<DraggablePlantComponent>
+    public class PotSystem : GameSystem<PotComponent>
     {
         private const float DragPositionY = 1f;
         private const float BasePositionY = 0f;
         
-        public override void Register(DraggablePlantComponent plant)
+        public override void Register(PotComponent plant)
         {
             plant.StartDrag
                 .Subscribe(_ => StartDragging(plant))
@@ -22,19 +22,19 @@ namespace Systems.DragPlant
                 .AddTo(plant);
         }
 
-        private void StopDragging(DraggablePlantComponent plant)
+        private void StopDragging(PotComponent plant)
         {
             plant.isDragged = false;
             plant.StartCoroutine(AnimateDown(plant));
         }
 
-        private void StartDragging(DraggablePlantComponent plant)
+        private void StartDragging(PotComponent plant)
         {
             plant.isDragged = true;
             plant.StartCoroutine(AnimateUp(plant));
         }
 
-        private static IEnumerator AnimateUp(DraggablePlantComponent plant)
+        private static IEnumerator AnimateUp(PotComponent plant)
         {
             plant.isAnimating = true;
             for (var i = 0; i < 10; i++)
@@ -47,7 +47,7 @@ namespace Systems.DragPlant
             plant.isAnimating = false;
         }
         
-        private static IEnumerator AnimateDown(DraggablePlantComponent plant)
+        private static IEnumerator AnimateDown(PotComponent plant)
         {
             plant.isAnimating = true;
             for (var i = 0; i < 10; i++)
