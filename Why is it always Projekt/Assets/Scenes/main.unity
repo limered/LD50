@@ -269,7 +269,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d2ca32d872253424f8eefff9fbd15f4f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.937
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2ca32d872253424f8eefff9fbd15f4f,
         type: 3}
@@ -279,7 +279,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d2ca32d872253424f8eefff9fbd15f4f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.523
+      value: 2.97
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2ca32d872253424f8eefff9fbd15f4f,
         type: 3}
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7c76eb77904df184b1732fa1f71cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLightValue: 40
+  currentLightValue: 0
   neededLightValue: 10
   maxLightValue: 50
   burnPoints: 0

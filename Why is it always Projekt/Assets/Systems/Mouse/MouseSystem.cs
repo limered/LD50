@@ -34,7 +34,13 @@ namespace Systems.Mouse
         private static void MovePlantWithMouse(MouseComponent mouse, RaycastHit hit)
         {
             var pos = mouse.draggedPlant.transform.position;
-            var targetPos = new Vector3(hit.point.x, pos.y, hit.point.z);
+            var targetPos = new Vector3
+            {
+                x = Mathf.Clamp(hit.point.x, -8, 8),
+                z = Mathf.Clamp(hit.point.z, -16, 15),
+                y = pos.y
+            };
+
             mouse.draggedPlant.transform.position = Vector3.Lerp(pos, targetPos, 0.7f);
         }
 
