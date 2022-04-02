@@ -58,13 +58,18 @@ namespace Systems.Plant
                 }
             }
 
-            plant.currentLightValue = Mathf.Min(0, Mathf.Max(plant.maxLightValue, plant.currentLightValue));
+            plant.currentLightValue = Mathf.Clamp(plant.currentLightValue, 0, plant.maxLightValue);
         }
 
         private static bool IsLit(NeedsLightComponent plant)
         {
             var rayDirection = -plant.sun.transform.forward;
-            return !Physics.Raycast(plant.transform.position, rayDirection, 40f);
+            if (Physics.Raycast(plant.transform.position, rayDirection, out var hit, 40f))
+            {
+                return !hit.transform.CompareTag("room");
+            }
+
+            return true;
         }
     }
 }

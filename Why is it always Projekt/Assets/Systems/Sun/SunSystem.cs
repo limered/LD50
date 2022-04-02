@@ -12,10 +12,10 @@ namespace Systems.Sun
             SystemUpdate(component).Subscribe(ProgressSun).AddTo(component);
         }
 
-        private void ProgressSun(SunComponent sun)
+        private static void ProgressSun(SunComponent sun)
         {
             sun.hour += sun.hoursPerSecond * Time.deltaTime;
-            sun.hour = (sun.hour > 16) ? 0 : sun.hour;
+            sun.hour = sun.hour > 16 ? 0 : sun.hour;
 
             var rotation = sun.hour / 8f;
             sun.transform.eulerAngles = sun.noon * rotation;
