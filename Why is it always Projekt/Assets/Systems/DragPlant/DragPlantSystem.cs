@@ -8,8 +8,8 @@ namespace Systems.DragPlant
     [GameSystem]
     public class DragPlantSystem : GameSystem<DraggablePlantComponent>
     {
-        private const float DragPositionY = 2f;
-        private const float BasePositionY = 0.5f;
+        private const float DragPositionY = 1f;
+        private const float BasePositionY = 0f;
         
         public override void Register(DraggablePlantComponent plant)
         {

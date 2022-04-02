@@ -45,11 +45,13 @@ namespace Systems.Mouse
 
             if (plant.isDragged)
             {
+                mouse.dragPlane.SetActive(false);
                 mouse.draggedPlant = null;
                 plant.StopDrag.Execute();
             }
             else
             {
+                mouse.dragPlane.SetActive(true);
                 mouse.draggedPlant = plant;
                 plant.StartDrag.Execute();
             }
