@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Systems.Plant
 {
     [GameSystem]
-    public class PlantSystem : GameSystem<NeedsLightComponent>
+    public class PlantSystem : GameSystem<NeedsLightComponent, PlantLifeComponent>
     {
         private const float LightIncrease = 1f;
         private const float LightDecrease = 0.2f;
@@ -13,11 +13,26 @@ namespace Systems.Plant
 
         public override void Register(NeedsLightComponent component)
         {
+            component.currentLightValue = (component.maxLightValue + component.neededLightValue) * 0.5f;
             SystemUpdate(component).Subscribe(UpdateLightValues).AddTo(component);
+        }
+        
+        public override void Register(PlantLifeComponent component)
+        {
+            SystemUpdate(component).Subscribe(plant =>
+            {
+                if (plant.lifePoints <= 0)
+                {
+                    // is dead
+                }
+            }).AddTo(component);
         }
 
         private void UpdateLightValues(NeedsLightComponent plant)
         {
+            var lifeComponent = plant.GetComponent<PlantLifeComponent>();
+            if (lifeComponent.lifePoints <= 0) return;
+            
             if (IsLit(plant))
             {
                 plant.currentLightValue += LightIncrease * Time.deltaTime;
@@ -29,8 +44,7 @@ namespace Systems.Plant
 
             if (plant.currentLightValue < plant.neededLightValue)
             {
-                // slowly die
-                // subtract lifepoints 
+                plant.GetComponent<PlantLifeComponent>().lifePoints -= 1 * Time.deltaTime;
             }
             else if (plant.currentLightValue > plant.maxLightValue)
             {
@@ -39,7 +53,7 @@ namespace Systems.Plant
 
             if (plant.burnPoints > plant.maxBurnPoints)
             {
-                // start burning or die
+                plant.GetComponent<PlantLifeComponent>().lifePoints -= 10 * Time.deltaTime;
             }
         }
 
