@@ -13,5 +13,10 @@ namespace Systems.GameFlow
         
         public List<string> messages;
         public string endText;
+
+        public int spawnedPlants;
+        public int deadPlants;
+
+        public GameObject endScreen;
     }
 }

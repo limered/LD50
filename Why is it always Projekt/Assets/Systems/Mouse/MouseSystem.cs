@@ -25,26 +25,26 @@ namespace Systems.Mouse
                 MovePlantWithMouse(mouse, hit);
                 if (Input.GetAxis("Fire1") <= 0)
                 {
-                    StopDrag(mouse, hit);
+                    StopDrag(mouse);
                 }
             }
             
-            if (Input.GetAxis("Fire1") > 0)
+            if (Input.GetAxis("Fire1") > 0 && mouse.draggedPlant == null)
             {
                 StartDrag(mouse, hit);
             }
         }
 
-        private void StopDrag(MouseComponent mouse, RaycastHit hit)
+        private void StopDrag(MouseComponent mouse)
         {
-            var plant = hit.transform.gameObject.GetComponent<PotComponent>();
+            var plant = mouse.draggedPlant;
             if (!plant || plant.isAnimating) return;
 
             if (plant.isDragged)
             {
                 mouse.dragPlane.SetActive(false);
-                mouse.draggedPlant = null;
                 plant.StopDrag.Execute();
+                mouse.draggedPlant = null;
             }
         }
 

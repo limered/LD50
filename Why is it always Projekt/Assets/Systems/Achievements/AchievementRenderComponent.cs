@@ -11,5 +11,7 @@ namespace Systems.Achievements
 
         public GameObject achievementPanel;
         public TextMeshProUGUI achievementText;
+
+        public GameObject achievementSummaryPrefab;
     }
 }

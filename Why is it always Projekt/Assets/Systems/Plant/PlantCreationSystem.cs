@@ -2,6 +2,7 @@
 using SystemBase.Core;
 using SystemBase.Utils;
 using Systems.DragPlant;
+using Systems.GameFlow;
 using Systems.Plant.Messages;
 using UniRx;
 using UnityEngine;
@@ -19,10 +20,6 @@ namespace Systems.Plant
                 .AddTo(component);
 
             MessageBroker.Default.Publish(new SpawnPlantMessage());
-            
-            // Observable.Interval(TimeSpan.FromSeconds(5))
-            //     .Subscribe(_ => MessageBroker.Default.Publish(new SpawnPlantMessage()))
-            //     .AddTo(component);
         }
 
         private void SpawnPlants(PlantSpawnerComponent spawner)
@@ -61,6 +58,8 @@ namespace Systems.Plant
             
             lifeComponent.lifePoints = 100;
             needsLightComponent.currentLightValue = needsLightComponent.neededLightValue;
+            
+            MessageBroker.Default.Publish(new PlantSpawnMessage());
         }
     }
 }

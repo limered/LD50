@@ -1,6 +1,7 @@
 ﻿using System;
 using SystemBase.Core;
 using Systems.Achievements;
+using Systems.GameFlow;
 using UniRx;
 using UnityEngine;
 
@@ -38,6 +39,7 @@ namespace Systems.Plant
                 var lifeComponent = plant.GetComponent<PlantLifeComponent>();
                 plant.GetComponent<MeshFilter>().mesh =
                     lifeComponent.deadPlant.GetComponent<MeshFilter>().sharedMesh;
+                MessageBroker.Default.Publish(new PlantDiedMessage());
             }).AddTo(component);
         }
 

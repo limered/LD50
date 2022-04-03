@@ -7,7 +7,6 @@ namespace SystemBase.Core
     public class GameBase : MonoBehaviour, IGameSystem
     {
         private readonly GameSystemCollection _systems = new GameSystemCollection(); 
-        public StringReactiveProperty DebugMainFrameCallback = new StringReactiveProperty();
 
         public Type[] ComponentsToRegister => Type.EmptyTypes;
 
@@ -15,10 +14,7 @@ namespace SystemBase.Core
         {
             _systems.Initialize();
             
-            DontDestroyOnLoad(this);
-            
-            DebugMainFrameCallback.ObserveOnMainThread()
-                .Subscribe(OnDebugCallbackCalled);
+            // DontDestroyOnLoad(this);
         }
 
         public void RegisterComponent(GameComponent component)
