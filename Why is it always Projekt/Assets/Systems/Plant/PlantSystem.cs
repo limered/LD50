@@ -1,5 +1,6 @@
 ﻿using System;
 using SystemBase.Core;
+using Systems.Achievements;
 using UniRx;
 using UnityEngine;
 
@@ -32,17 +33,18 @@ namespace Systems.Plant
             component.lifePoints = 100;
             SystemUpdate(component).Subscribe(plant =>
             {
-                if (plant.lifePoints <= 0)
-                {
-                    // is dead
-                }
+                if (plant.isDead || plant.lifePoints > 0) return;
+                plant.isDead = true;
+                var lifeComponent = plant.GetComponent<PlantLifeComponent>();
+                plant.GetComponent<MeshFilter>().mesh =
+                    lifeComponent.deadPlant.GetComponent<MeshFilter>().sharedMesh;
             }).AddTo(component);
         }
 
         private void UpdateLightValues(NeedsLightComponent plant)
         {
             var lifeComponent = plant.GetComponent<PlantLifeComponent>();
-            if (lifeComponent.lifePoints <= 0)
+            if (lifeComponent.isDead)
             {
                 lifeComponent.bubble.SetActive(false);
                 return;
@@ -54,6 +56,7 @@ namespace Systems.Plant
                 
                 if (plant.currentLightValue > plant.maxLightValue)
                 {
+                    MessageBroker.Default.Publish(new AchievementMessage{Achievement = new Achievement{name = "Too much sun!"}});
                     plant.burnPoints += BurnPointsIncrease * Time.deltaTime;
                     
                     lifeComponent.bubble.SetActive(true);
@@ -61,6 +64,7 @@ namespace Systems.Plant
                     
                     if (plant.burnPoints > plant.maxBurnPoints)
                     {
+                        MessageBroker.Default.Publish(new AchievementMessage{Achievement = new Achievement{name = "Burn baby burn!"}});
                         lifeComponent.bubbleContent.material = lifeComponent.bubbleContents[(int)BubbleImages.Fire];
                         lifeComponent.lifePoints -= 10 * Time.deltaTime;
                     }

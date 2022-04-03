@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using SystemBase.Core;
+using Systems.Achievements;
 using UniRx;
 using UnityEngine;
 
@@ -30,6 +31,7 @@ namespace Systems.DragPlant
 
         private void StartDragging(PotComponent plant)
         {
+            MessageBroker.Default.Publish(new AchievementMessage{Achievement = new Achievement{name = "Keep on moovin."}});
             plant.isDragged = true;
             plant.StartCoroutine(AnimateUp(plant));
         }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using SystemBase.Core;
 using UniRx;
+using UnityEngine;
 
 namespace Systems.Achievements
 {
@@ -13,11 +15,34 @@ namespace Systems.Achievements
             {
                 var achievement =
                     component.achievements.Find(achievement1 => achievement1.name == msg.Achievement.name);
-                if(achievement != null)
+                if(achievement is { achieved: false })
                 {
                     achievement.achieved = true;
+                    component.achievementText.text = achievement.name;
+                    component.StartCoroutine(AnimateAchievement(component.achievementPanel));
                 }
             }).AddTo(component);
+        }
+
+        private IEnumerator AnimateAchievement(GameObject panel)
+        {
+            for (var i = 0; i < 10; i++)
+            {
+                var pos = panel.transform.position;
+                var newY = Mathf.Lerp(pos.y, 75f, i / 10f);
+                panel.transform.position = new Vector3(pos.x, newY, pos.z);
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(3);
+            
+            for (var i = 0; i < 10; i++)
+            {
+                var pos = panel.transform.position;
+                var newY = Mathf.Lerp(pos.y, -50f, i / 10f);
+                panel.transform.position = new Vector3(pos.x, newY, pos.z);
+                yield return null;
+            }
         }
     }
 

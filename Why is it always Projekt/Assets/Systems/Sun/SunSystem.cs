@@ -1,4 +1,6 @@
 ﻿using SystemBase.Core;
+using Systems.GameFlow;
+using Systems.Plant.Messages;
 using UniRx;
 using UnityEngine;
 
@@ -15,6 +17,11 @@ namespace Systems.Sun
         private static void ProgressSun(SunComponent sun)
         {
             sun.hour += sun.hoursPerSecond * Time.deltaTime;
+            if (sun.hour > 16)
+            {
+                MessageBroker.Default.Publish(new SpawnPlantMessage());
+                MessageBroker.Default.Publish(new SaySomethingMessage());
+            }
             sun.hour = sun.hour > 16 ? 0 : sun.hour;
 
             var rotation = sun.hour / 8f;

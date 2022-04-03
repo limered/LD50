@@ -23,11 +23,28 @@ namespace Systems.Mouse
             if (mouse.draggedPlant)
             {
                 MovePlantWithMouse(mouse, hit);
+                if (Input.GetAxis("Fire1") <= 0)
+                {
+                    StopDrag(mouse, hit);
+                }
             }
             
             if (Input.GetAxis("Fire1") > 0)
             {
-                SwitchDrag(mouse, hit);
+                StartDrag(mouse, hit);
+            }
+        }
+
+        private void StopDrag(MouseComponent mouse, RaycastHit hit)
+        {
+            var plant = hit.transform.gameObject.GetComponent<PotComponent>();
+            if (!plant || plant.isAnimating) return;
+
+            if (plant.isDragged)
+            {
+                mouse.dragPlane.SetActive(false);
+                mouse.draggedPlant = null;
+                plant.StopDrag.Execute();
             }
         }
 
@@ -44,18 +61,12 @@ namespace Systems.Mouse
             mouse.draggedPlant.transform.position = Vector3.Lerp(pos, targetPos, 0.7f);
         }
 
-        private static void SwitchDrag(MouseComponent mouse, RaycastHit hit)
+        private static void StartDrag(MouseComponent mouse, RaycastHit hit)
         {
             var plant = hit.transform.gameObject.GetComponent<PotComponent>();
             if (!plant || plant.isAnimating) return;
 
-            if (plant.isDragged)
-            {
-                mouse.dragPlane.SetActive(false);
-                mouse.draggedPlant = null;
-                plant.StopDrag.Execute();
-            }
-            else
+            if (!plant.isDragged)
             {
                 mouse.dragPlane.SetActive(true);
                 mouse.draggedPlant = plant;

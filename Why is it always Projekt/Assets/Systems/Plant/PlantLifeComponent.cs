@@ -11,5 +11,8 @@ namespace Systems.Plant
         public GameObject bubble;
         public MeshRenderer bubbleContent;
         public Material[] bubbleContents;
+
+        public GameObject deadPlant;
+        public bool isDead;
     }
 }
