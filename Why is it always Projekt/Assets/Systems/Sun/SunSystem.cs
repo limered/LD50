@@ -1,4 +1,6 @@
 ﻿using SystemBase.Core;
+using SystemBase.GameState.States;
+using SystemBase.Utils;
 using Systems.GameFlow;
 using Systems.Plant.Messages;
 using UniRx;
@@ -16,6 +18,7 @@ namespace Systems.Sun
 
         private static void ProgressSun(SunComponent sun)
         {
+            if (IoC.Game.gameStateContext.CurrentState.Value is not Running) return;
             sun.hour += sun.hoursPerSecond * Time.deltaTime;
             if (sun.hour > 16)
             {

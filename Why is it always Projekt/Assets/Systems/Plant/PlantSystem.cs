@@ -20,8 +20,8 @@ namespace Systems.Plant
     public class PlantSystem : GameSystem<NeedsLightComponent, PlantLifeComponent>
     {
         private const float LightIncrease = 1f;
-        private const float LightDecrease = 1f;
-        private const float BurnPointsIncrease = 1f;
+        private const float LightDecrease = 2f;
+        private const float BurnPointsIncrease = 2f;
 
         public override void Register(NeedsLightComponent component)
         {

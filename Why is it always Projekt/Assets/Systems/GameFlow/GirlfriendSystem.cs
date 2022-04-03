@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using SystemBase.Core;
+using SystemBase.GameState.Messages;
 using SystemBase.Utils;
 using Systems.Achievements;
 using TMPro;
@@ -51,6 +52,7 @@ namespace Systems.GameFlow
                 .Subscribe(_ =>
                 {
                     if (component.endScreen.activeSelf) return;
+                    MessageBroker.Default.Publish(new GameMsgEnd());
                     MessageBroker.Default.Publish(new AchievementMessage{Achievement = new Achievement{name = "R.I.P."}});
                     component.endScreen.SetActive(true);
                     var achieved = _achievements.achievements;
