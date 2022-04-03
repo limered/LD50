@@ -18,12 +18,12 @@ namespace Systems.Plant
     public class PlantSystem : GameSystem<NeedsLightComponent, PlantLifeComponent>
     {
         private const float LightIncrease = 1f;
-        private const float LightDecrease = 0.2f;
+        private const float LightDecrease = 1f;
         private const float BurnPointsIncrease = 1f;
 
         public override void Register(NeedsLightComponent component)
         {
-            component.currentLightValue = (component.maxLightValue + component.neededLightValue) * 0.5f;
+            
             SystemUpdate(component).Subscribe(UpdateLightValues).AddTo(component);
         }
         
@@ -42,7 +42,11 @@ namespace Systems.Plant
         private void UpdateLightValues(NeedsLightComponent plant)
         {
             var lifeComponent = plant.GetComponent<PlantLifeComponent>();
-            if (lifeComponent.lifePoints <= 0) return;
+            if (lifeComponent.lifePoints <= 0)
+            {
+                lifeComponent.bubble.SetActive(false);
+                return;
+            }
             
             if (IsLit(plant))
             {
@@ -52,19 +56,34 @@ namespace Systems.Plant
                 {
                     plant.burnPoints += BurnPointsIncrease * Time.deltaTime;
                     
+                    lifeComponent.bubble.SetActive(true);
+                    lifeComponent.bubbleContent.material = lifeComponent.bubbleContents[(int)BubbleImages.SunLess];
+                    
                     if (plant.burnPoints > plant.maxBurnPoints)
                     {
+                        lifeComponent.bubbleContent.material = lifeComponent.bubbleContents[(int)BubbleImages.Fire];
                         lifeComponent.lifePoints -= 10 * Time.deltaTime;
                     }
+                }
+                else
+                {
+                    lifeComponent.bubble.SetActive(false);
                 }
             }
             else
             {
                 plant.currentLightValue -= LightDecrease * Time.deltaTime;
+                plant.burnPoints = 0;
                 
                 if (plant.currentLightValue < plant.neededLightValue)
                 {
+                    lifeComponent.bubble.SetActive(true);
+                    lifeComponent.bubbleContent.material = lifeComponent.bubbleContents[(int)BubbleImages.SunMore];
                     lifeComponent.lifePoints -= 1 * Time.deltaTime;
+                }
+                else
+                {
+                    lifeComponent.bubble.SetActive(false);
                 }
             }
 

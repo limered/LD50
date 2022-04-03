@@ -9,7 +9,7 @@ namespace Systems.Plant
         public PlantDefinition plantDefinition;
 
         public GameObject bubble;
-        public GameObject bubbleContent;
+        public MeshRenderer bubbleContent;
         public Material[] bubbleContents;
     }
 }

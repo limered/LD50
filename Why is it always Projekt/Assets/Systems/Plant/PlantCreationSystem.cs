@@ -20,9 +20,9 @@ namespace Systems.Plant
 
             MessageBroker.Default.Publish(new SpawnPlantMessage());
             
-            Observable.Interval(TimeSpan.FromSeconds(5))
-                .Subscribe(_ => MessageBroker.Default.Publish(new SpawnPlantMessage()))
-                .AddTo(component);
+            // Observable.Interval(TimeSpan.FromSeconds(5))
+            //     .Subscribe(_ => MessageBroker.Default.Publish(new SpawnPlantMessage()))
+            //     .AddTo(component);
         }
 
         private void SpawnPlants(PlantSpawnerComponent spawner)
@@ -50,12 +50,17 @@ namespace Systems.Plant
                 plantPosition.transform);
             plant.transform.localPosition = Vector3.zero;
             plant.GetComponent<MeshFilter>().mesh = plantDefinition.plant.GetComponent<MeshFilter>().sharedMesh;
-            plant.GetComponent<PlantLifeComponent>().plantDefinition = plantDefinition;
+            var lifeComponent = plant.GetComponent<PlantLifeComponent>();
+            lifeComponent.plantDefinition = plantDefinition;
+            
             var needsLightComponent = plant.GetComponent<NeedsLightComponent>();
             needsLightComponent.sun = spawner.sun;
             needsLightComponent.neededLightValue = plantDefinition.neededLightValue;
             needsLightComponent.maxLightValue = plantDefinition.maxLightValue;
             needsLightComponent.maxBurnPoints = plantDefinition.maxBurnPoints;
+            
+            lifeComponent.lifePoints = 100;
+            needsLightComponent.currentLightValue = needsLightComponent.neededLightValue;
         }
     }
 }
