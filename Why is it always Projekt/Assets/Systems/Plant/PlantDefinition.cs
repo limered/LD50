@@ -5,7 +5,6 @@ namespace Systems.Plant
     [CreateAssetMenu(menuName = "aaa/plant")]
     public class PlantDefinition : ScriptableObject
     {
-        public GameObject pot;
         public GameObject plant;
         public float neededLightValue;
         public float maxLightValue;

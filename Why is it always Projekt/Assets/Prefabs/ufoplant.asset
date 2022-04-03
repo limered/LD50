@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b9da61ac4041d582b9f8bb74d069c4, type: 3}
+  m_Name: ufoplant
+  m_EditorClassIdentifier: 
+  plant: {fileID: 919132149155446097, guid: 07ee01eaae11c7b43b4c12112bf1c61f, type: 3}
+  neededLightValue: 15
+  maxLightValue: 30
+  maxBurnPoints: 50

@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7b9da61ac4041d582b9f8bb74d069c4, type: 3}
-  m_Name: RedPotPlant
+  m_Name: farn
   m_EditorClassIdentifier: 
-  pot: {fileID: 0}
-  plant: {fileID: 0}
-  neededLightValue: 5
-  maxLightValue: 20
-  maxBurnPoints: 0
+  plant: {fileID: 919132149155446097, guid: 759d4ac4b25d01d49876fc09c9150f46, type: 3}
+  neededLightValue: 1
+  maxLightValue: 5
+  maxBurnPoints: 10

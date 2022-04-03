@@ -1,5 +1,6 @@
 using SystemBase.Core;
 using UniRx;
+using UnityEngine;
 
 namespace Systems.DragPlant
 {
@@ -9,5 +10,7 @@ namespace Systems.DragPlant
         public readonly ReactiveCommand StopDrag = new ReactiveCommand();
         public bool isDragged;
         public bool isAnimating;
+
+        public GameObject plantLocation;
     }
 }

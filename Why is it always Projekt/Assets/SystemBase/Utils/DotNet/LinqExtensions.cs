@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Random = UnityEngine.Random;
 
@@ -11,14 +12,16 @@ namespace SystemBase.Utils
             return coll.OrderBy(x => x).Skip(n - 1).FirstOrDefault();
         }
 
+        [Pure]
         public static List<T> Randomize<T>(this List<T> list)
         {
+            var oldList = list.ToList();
             var result = new List<T>(list.Count);
-            while (list.Count > 0)
+            while (oldList.Count > 0)
             {
-                var rnd = (int) (Random.value * list.Count);
-                result.Add(list[rnd]);
-                list.RemoveAt(rnd);
+                var rnd = (int) (Random.value * oldList.Count);
+                result.Add(oldList[rnd]);
+                oldList.RemoveAt(rnd);
             }
             return result;
         }

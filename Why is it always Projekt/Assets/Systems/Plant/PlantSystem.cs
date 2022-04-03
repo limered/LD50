@@ -20,6 +20,7 @@ namespace Systems.Plant
         
         public override void Register(PlantLifeComponent component)
         {
+            component.lifePoints = 100;
             SystemUpdate(component).Subscribe(plant =>
             {
                 if (plant.lifePoints <= 0)

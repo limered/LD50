@@ -5,5 +5,6 @@ namespace Systems.Plant
     public class PlantLifeComponent : GameComponent
     {
         public float lifePoints;
+        public PlantDefinition plantDefinition;
     }
 }

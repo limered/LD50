@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 9036607209986153135}
   - component: {fileID: 6524745166579150437}
   - component: {fileID: 1372600429}
-  - component: {fileID: 1372600430}
   - component: {fileID: 1372600425}
+  - component: {fileID: 2051318190}
   m_Layer: 6
   m_Name: pot3
   m_TagString: Untagged
@@ -30,9 +30,10 @@ Transform:
   m_GameObject: {fileID: 4723274736158248880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.509, y: 0, z: -1.178}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1793165097581763977}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,20 +103,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!136 &1372600430
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4723274736158248880}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.40208298
-  m_Height: 0.613509
-  m_Direction: 1
-  m_Center: {x: 0.002083093, y: 0.30055246, z: -0.00000008940697}
 --- !u!114 &1372600425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,3 +117,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDragged: 0
   isAnimating: 0
+  plantLocation: {fileID: 5432643272892186229}
+--- !u!136 &2051318190
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4723274736158248880}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.80416596
+  m_Height: 1.227018
+  m_Direction: 1
+  m_Center: {x: 0.004166186, y: 0.6011049, z: -0.00000017881393}
+--- !u!1 &5432643272892186229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1793165097581763977}
+  m_Layer: 6
+  m_Name: plantLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1793165097581763977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432643272892186229}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.049, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5388453550193530122}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
