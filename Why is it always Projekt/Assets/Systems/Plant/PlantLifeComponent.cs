@@ -1,4 +1,5 @@
 ﻿using SystemBase.Core;
+using UnityEngine;
 
 namespace Systems.Plant
 {
@@ -6,5 +7,9 @@ namespace Systems.Plant
     {
         public float lifePoints;
         public PlantDefinition plantDefinition;
+
+        public GameObject bubble;
+        public GameObject bubbleContent;
+        public Material[] bubbleContents;
     }
 }

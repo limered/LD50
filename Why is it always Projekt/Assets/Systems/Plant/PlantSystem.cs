@@ -5,6 +5,15 @@ using UnityEngine;
 
 namespace Systems.Plant
 {
+    public enum BubbleImages
+    {
+        SunMore,
+        SunLess,
+        Fire,
+        WaterMore,
+        WaterLess,
+    }
+    
     [GameSystem]
     public class PlantSystem : GameSystem<NeedsLightComponent, PlantLifeComponent>
     {
