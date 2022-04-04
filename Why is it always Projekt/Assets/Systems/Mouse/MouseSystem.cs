@@ -1,4 +1,5 @@
-﻿using SystemBase.Core;
+﻿using SystemBase.CommonSystems.Audio;
+using SystemBase.Core;
 using Systems.DragPlant;
 using UniRx;
 using UnityEngine;
@@ -45,6 +46,7 @@ namespace Systems.Mouse
                 mouse.dragPlane.SetActive(false);
                 plant.StopDrag.Execute();
                 mouse.draggedPlant = null;
+                "putdown".Play();
             }
         }
 
@@ -71,6 +73,7 @@ namespace Systems.Mouse
                 mouse.dragPlane.SetActive(true);
                 mouse.draggedPlant = plant;
                 plant.StartDrag.Execute();
+                "pickup".Play();
             }
         }
     }

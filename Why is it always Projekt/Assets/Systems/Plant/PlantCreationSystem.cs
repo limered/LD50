@@ -1,4 +1,5 @@
 ﻿using System;
+using SystemBase.CommonSystems.Audio;
 using SystemBase.Core;
 using SystemBase.Utils;
 using Systems.DragPlant;
@@ -24,6 +25,7 @@ namespace Systems.Plant
 
         private void SpawnPlants(PlantSpawnerComponent spawner)
         {
+            "newplant".Play();
             var spawnPositions = spawner.spawnPositions.Randomize();
             var potPrefabs = spawner.potsPrefabs.Randomize();
             var plantDefinitions = spawner.plantDefinitions.Randomize();

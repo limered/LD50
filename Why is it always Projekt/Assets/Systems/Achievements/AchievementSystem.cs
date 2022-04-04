@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using SystemBase.CommonSystems.Audio;
 using SystemBase.Core;
 using UniRx;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace Systems.Achievements
                     component.achievements.Find(achievement1 => achievement1.name == msg.Achievement.name);
                 if(achievement is { achieved: false })
                 {
+                    "achievement".Play();
                     achievement.achieved = true;
                     component.achievementText.text = achievement.name;
                     component.StartCoroutine(AnimateAchievement(component.achievementPanel));
